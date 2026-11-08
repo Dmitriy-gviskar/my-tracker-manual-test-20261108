@@ -9,3 +9,9 @@ export function toggleTask(tasks, id) {
 export function deleteTask(tasks, id) {
   return tasks.filter(task => task.id !== id);
 }
+
+export function selectTasks(tasks, query = '', status = 'all') {
+  const text = query.trim().toLocaleLowerCase('ru-RU');
+  return tasks.filter(task => task.title.toLocaleLowerCase('ru-RU').includes(text) &&
+    (status === 'all' || (status === 'active' && !task.completed) || (status === 'completed' && task.completed)));
+}
